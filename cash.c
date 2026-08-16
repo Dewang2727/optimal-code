@@ -1,26 +1,44 @@
+#include <cs50.h>
+#include <math.h>
 #include <stdio.h>
-
 int main(void)
 {
-    int cents;
-
+    int num;
     do
     {
-        printf("Change owed: ");
-        scanf("%d", &cents);
+        num = get_int("Change owed: ");
     }
-    while (cents < 0);
+    while (num < 0);
 
-    int coins = cents / 25;
-    cents %= 25;
+    // Calculate how many quarters 25
+    int temp = num;
+    int count = 0;
+    while (temp >= 25)
+    {
+        temp -= 25;
+        count += 1;
+    }
 
-    coins += cents / 10;
-    cents %= 10;
+    // Calculate how many dimes 10
+    while (temp >= 10)
+    {
+        temp -= 10;
+        count += 1;
+    }
 
-    coins += cents / 5;
-    cents %= 5;
+    // Calculate how many nickels 5
+    while (temp >= 5)
+    {
+        temp -= 5;
+        count += 1;
+    }
 
-    coins += cents;
+    // Calculate how many pennies 1
+    while (temp >= 1)
+    {
+        temp -= 1;
+        count += 1;
+    }
 
-    printf("%d\n", coins);
+    printf("%d \n", count);
 }
